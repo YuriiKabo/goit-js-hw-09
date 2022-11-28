@@ -6,16 +6,16 @@ const refs = {
   step: document.querySelector('[name="step"]'),
   amount: document.querySelector('[name="amount"]'),
 };
+refs.form.addEventListener('submit', onSubmit);
 
-refs.form.addEventListener('submit', onFormSubmit);
-
-function onFormSubmit(evt) {
+function onSubmit(evt) {
   evt.preventDefault();
-  createNumbers(
+  getNumbers(
     Number(refs.delay.value),
     Number(refs.step.value),
     Number(refs.amount.value)
   );
+  refs.form.reset();
 }
 
 function createPromise(position, delay) {
@@ -31,7 +31,7 @@ function createPromise(position, delay) {
   });
 }
 
-function createNumbers(delay, step, amount) {
+function getNumbers(delay, step, amount) {
   for (let i = 1; i <= amount; i += 1) {
     delay += i === 1 ? 0 : step;
     createPromise(i, delay)
