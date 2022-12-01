@@ -15,7 +15,6 @@ function onSubmit(evt) {
     Number(refs.step.value),
     Number(refs.amount.value)
   );
-  refs.form.reset();
 }
 
 function createPromise(position, delay) {
@@ -44,6 +43,7 @@ function getNumbers(delay, step, amount) {
         Notify.failure(`Rejected promise ${position} in ${delay}ms`, {
           timeout: 2000,
         });
-      });
+      })
+      .finally(() => refs.form.reset());
   }
 }
